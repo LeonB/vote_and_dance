@@ -1,0 +1,11 @@
+development: &defaults
+paths:
+ - "~/Music"
+ - "sftp://leon@basil.vanutsteen.nl/"
+exiftool: /usr/bin/exiftool
+
+test:
+ <<: *defaults
+
+production:
+ <<: *defaults
