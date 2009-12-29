@@ -36,7 +36,7 @@ class Indexing < SimpleDaemon::Base
         # TODO: execute some tasks in the background repeatedly
         
         # YOUR CODE HERE
-        Indexer.start()
+        Indexer.new.run()
         
         # Optional. Sleep between tasks.
         Kernel.sleep 1

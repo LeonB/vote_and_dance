@@ -77,7 +77,7 @@ class FileWatcher
       if event.flags.include?(:isdir)
         return self._renamed_dir(location, to_location) if event.flags.include?(:moved_from)
       else
-        return self._renamed_file(location) if event.flags.include?(:moved_from)
+        return self._renamed_file(location, to_location) if event.flags.include?(:moved_from)
       end
 
       return if event.flags.include?(:moved_to)
