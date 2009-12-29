@@ -13,10 +13,10 @@
 :root_path: <%= RAILS_ROOT %>
 
 # Where daemonz should log - set to stdout, stderr, or rails.
-:logger: stdout
+:logger: rails
 
 # Set to true to completely disable daemonz, and not load any plugins.
-:disabled: false
+:disabled: true
 
 # daemonz is loaded every time the Rails framework is loaded. Sometimes
 # (e.g. when performing migrations) daemons aren't required, so we shouldn't
@@ -29,6 +29,7 @@
 - 'script/generate'
 - 'script/destroy'
 - 'script/plugin'
+- 'script/console'
 # Assuming you don't want to wait for daemons to start most of the times when
 # you pull up a console. You can always start / stop them up by hand with
 # rake daemons:start / rake daemons:stop, or you can remove the line below.

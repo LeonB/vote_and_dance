@@ -1,83 +1,52 @@
-#http://github.com/nex3/rb-inotify
-#http://github.com/costan/daemonz/
+require 'rubygems'
+require 'rb-inotify'
+require 'lib/filewatcher.rb'
 
-require 'gst'
-require 'inotify'
-
-class Indexer
-  def self.start()
-    i = Indexer.new()
-    
-    AppConfig.paths.each do |path|
-      AppConfig.paths.each do |path|
-        uri = URI::extract(path)
-
-        if uri[0]
-          next #url's are not supported yet
-        end
-
-        path = File.expand_path(path)
-
-        i.walk(path)
-      end
-    end
-
-    i.watch()
+class Indexer < FileWatcher
+  def initialize()
+    super(AppConfig.paths)
   end
 
-  def watch
-    inotify_watches = {}
-    incoming_notifier = Inotify.new
-    outgoing_notifier = Inotify.new
+  def new_dir(path)
+    Rails.logger.debug("New dir #{path}")
+    self.walk(path)
+  end
 
-    t1 = Thread.new do
-      incoming_notifier.each_event do |event|
-        path = inotify_watches[event.wd]
-        location = "#{path}/#{event.name}"
-        song = Song.find_or_create_by_location(location)
-        song.get_metadata()
-        song.save()
-      end
-    end
+  def deleted_dir(path)
+    Rails.logger.debug("Deleted dir #{path}")
+    Song.delete_all("location Like '#{path}%'")
+  end
 
-    t2 = Thread.new do
-      outgoing_notifier.each_event do |event|
-        path = inotify_watches[event.wd]
-        location = "#{path}/#{event.name}"
-        songs = Song.find_by_location(location)
+  def renamed_dir(from_path, to_path)
+    Rails.logger.debug("Dir renamed from #{from_path} to #{to_path}")
+  end
 
-        if songs
-          songs.delete
-        end
-      end
-    end
+  def new_file(path)
+    Rails.logger.debug("New file #{path}")
+    song = Song.find_or_create_by_location(path)
+    song.get_metadata()
+    song.save()
+  end
 
-    AppConfig.paths.each do |path|
-      uri = URI::extract(path)
+  def deleted_file(path)
+    Rails.logger.debug("Deleted file #{path}")
+    Song.delete_all(['location = ?', path])
+  end
 
-      if uri[0]
-        next #url's are not supported yet
-      end
-
-      path = File.expand_path(path)
-#      location = "#{event.watcher.path}/#{event.name}"
-      
-      wd = incoming_notifier.add_watch(path, Inotify::CREATE | Inotify::MODIFY | Inotify::MOVED_TO)
-      inotify_watches[wd] = path
-      wd = outgoing_notifier.add_watch(path, Inotify::DELETE | Inotify::MOVED_FROM)
-      inotify_watches[wd] = path
-
-    end
-      t1.join()
-      t2.join()
+  def renamed_file(from_path, to_path)
+    Rails.logger.debug("File renamed from #{from_path} to #{to_path}")
   end
 
   def walk(dir)
     locations = []
-    
-    Dir["#{dir}**/*.*"].each do |path|
+    ids = []
+
+    dir = dir.gsub(/\/*$/, '')
+
+    Dir["#{dir}/**/*.*"].each do |path|
       song = Song.find_or_create_by_location(path)
       locations << path
+      ids << song.id
 
       if not song.metadata?
         song.get_metadata()
@@ -85,6 +54,8 @@ class Indexer
       end
     end
 
-    Song.delete_all(['location NOT IN (?)', locations])
+    if ids.length > 0
+      Song.delete_all(['id NOT IN (?) AND location LIKE ?', ids, "#{dir}%"])
+    end
   end
 end

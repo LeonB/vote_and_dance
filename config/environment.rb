@@ -41,6 +41,6 @@ Rails::Initializer.run do |config|
 
   ##CUSTOM##
   config.gem "simple-daemon"
-#  config.gem "rb-inotify"
-  require "inotify"
+  config.gem "rb-inotify"
+#  require "inotify"
 end
