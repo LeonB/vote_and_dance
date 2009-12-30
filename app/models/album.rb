@@ -1,27 +1,11 @@
-#class Album < ActiveRecord::Base
-class Album
-  attr_accessor :album, :album_artist
+class Album < ActiveRecord::Base
+  has_many :songs
+  has_many :performers, :through => :songs, :class_name => 'Artist', 
+    :source => 'artist', :select => 'DISTINCT artists.*'
+  belongs_to :artist
 
-  def self.all()
-    albums = []
+  #Validations:
+  validates_presence_of :title
 
-    Song.find(:all, :select => 'DISTINCT album, album_artist',
-      :order => 'album', :conditions => 'album NOT NULL').each do |values|
-        album = Album.new
-        album.album = values.album
-        album.album_artist = values.album_artist
-        albums << album
-      end
-      return albums
-  end
-
-  def self.initials()
-    Song.find(:all, :select => 'DISTINCT SUBSTR( album, 1, 1) as initial',
-    :order => 'album').collect(&:initial).compact
-  end
-
-  def songs
-    Song.find(:all, :conditions => ['album = ? AND album_artist = ?',
-        self.album, self.album_artist])
-  end
+  
 end

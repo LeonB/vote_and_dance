@@ -7,3 +7,16 @@
 #   Major.create(:name => 'Daley', :city => cities.first)
 
 Playlist.create({:name => 'Default', :default => true})
+
+AppConfig.paths.each do |path|
+  uri = URI::extract(path)
+
+  if uri[0]
+    next #url's are not supported yet
+  end
+
+  path = path.gsub(/\/*$/, '') #remove right slash
+  path = File.expand_path(path)
+
+  Indexer.new.walk(path)
+end
