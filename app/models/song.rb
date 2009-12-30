@@ -1,6 +1,10 @@
 class Song < ActiveRecord::Base
   has_many :votes
 
+  validates_presence_of :location
+  validate :valid_extension
+
+
   def get_metadata
     t = TagReader.new
     t.read(self.location)
@@ -28,5 +32,17 @@ class Song < ActiveRecord::Base
 
   def metadata?
     
+  end
+
+  def valid_extension
+    require 'ftools'
+    if not self.location
+      return false
+    end
+
+    extension = File.extname(self.location)
+    if not AppConfig.accepted_extensions.include?(extension)
+      errors.add_to_base(".#{extension} is not an accepted extension")
+    end
   end
 end

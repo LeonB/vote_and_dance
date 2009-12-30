@@ -3,6 +3,13 @@ paths:
  - "~/Music"
  - "sftp://leon@basil.vanutsteen.nl/"
 exiftool: /usr/bin/exiftool
+accepted_extensions:
+ - mp3
+ - .ogg
+ - .flac
+ - .wma
+ - ape
+ - wav
 
 test:
  <<: *defaults
