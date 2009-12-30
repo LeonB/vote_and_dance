@@ -30,17 +30,13 @@ class Song < ActiveRecord::Base
     updated_attributes
   end
 
-  def metadata?
-    
-  end
-
   def valid_extension
     require 'ftools'
     if not self.location
       return false
     end
 
-    extension = File.extname(self.location)
+    extension = File.extname(self.location).gsub(/^\./, '')
     if not AppConfig.accepted_extensions.include?(extension)
       errors.add_to_base(".#{extension} is not an accepted extension")
     end

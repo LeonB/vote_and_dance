@@ -2,7 +2,7 @@ class TagReader
   attr_accessor :output
   
   def read(path)
-    python = AppConfig.python || `which python`.strip()
+    python = AppConfig.python
     path = path.gsub(/['"\\\x0]/,'\\\\\0')
     self.output = `#{python} #{Rails.root}/lib/readtags.py '#{path}'`
     self

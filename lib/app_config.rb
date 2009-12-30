@@ -9,3 +9,7 @@ AppConfig = OpenStruct.new(config)
 AppConfig.accepted_extensions.each do |extension|
   extension.gsub!(/^\./, '')
 end
+
+if AppConfig.pyton.nil?
+  AppConfig.python = `which python`.strip()
+end
