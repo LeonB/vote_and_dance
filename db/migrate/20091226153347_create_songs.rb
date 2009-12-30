@@ -4,10 +4,12 @@ class CreateSongs < ActiveRecord::Migration
       t.string  :title
       t.string  :genre
       t.string  :artist
+      t.string  :album_artist
       t.string  :album
       t.string  :location
-      t.integer :track
-      t.string :duration
+      t.integer :track_number
+      t.integer :track_count
+      t.string  :duration
       t.integer :filesize
       t.timestamps
     end

@@ -2,6 +2,7 @@ class CreatePlaylists < ActiveRecord::Migration
   def self.up
      create_table :playlists do |t|
        t.string :name
+       t.boolean :default
        t.timestamps
      end
   end

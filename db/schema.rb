@@ -11,11 +11,6 @@
 
 ActiveRecord::Schema.define(:version => 20091228010423) do
 
-  create_table "indexers", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "playlist_items", :force => true do |t|
     t.integer  "song_id"
     t.integer  "playlist_id"
@@ -26,8 +21,11 @@ ActiveRecord::Schema.define(:version => 20091228010423) do
     t.datetime "updated_at"
   end
 
+  add_index "playlist_items", ["song_id"], :name => "index_playlist_items_on_song_id"
+
   create_table "playlists", :force => true do |t|
     t.string   "name"
+    t.boolean  "default"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,9 +44,11 @@ ActiveRecord::Schema.define(:version => 20091228010423) do
     t.string   "title"
     t.string   "genre"
     t.string   "artist"
+    t.string   "album_artist"
     t.string   "album"
     t.string   "location"
-    t.integer  "track"
+    t.integer  "track_number"
+    t.integer  "track_count"
     t.string   "duration"
     t.integer  "filesize"
     t.datetime "created_at"
@@ -82,5 +82,8 @@ ActiveRecord::Schema.define(:version => 20091228010423) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "votes", ["playlist_id"], :name => "index_votes_on_playlist_id"
+  add_index "votes", ["song_id"], :name => "index_votes_on_song_id"
 
 end

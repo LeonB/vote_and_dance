@@ -24,7 +24,7 @@ class tag_getter:
         taglist = message.parse_tag()
         #put the keys in the dictionary
         for key in taglist.keys():
-            print str(key) + ':-:' + str(taglist[key])
+            print str(key).replace('-', '_') + ':-:' + str(taglist[key])
         sys.exit()
         
     def set_file(self,file):

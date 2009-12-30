@@ -8,8 +8,7 @@ class CreatePlaylistItems < ActiveRecord::Migration
     end
 
     #add_index :playlist_items, [:song_id, :playlist_id], :unique => true
-
-    Playlist.new(:name => 'default').save
+    add_index(:playlist_items, :song_id)
   end
 
   def self.down

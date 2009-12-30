@@ -1,9 +1,9 @@
 class Song < ActiveRecord::Base
   has_many :votes
 
+  #Validations:
   validates_presence_of :location
   validate :valid_extension
-
 
   def get_metadata
     t = TagReader.new
@@ -28,6 +28,10 @@ class Song < ActiveRecord::Base
     end
     self.update_attributes(updated_attributes)
     updated_attributes
+  end
+
+  def metadata?
+    
   end
 
   def valid_extension

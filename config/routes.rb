@@ -40,6 +40,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.root :controller => "user_sessions", :action => "new"
 
+  map.resources :songs
+
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.

@@ -4,6 +4,9 @@ class CreateVotes < ActiveRecord::Migration
       t.integer :song_id, :playlist_id, :created_by, :updated_by
       t.timestamps
     end
+
+    add_index(:votes, :song_id)
+    add_index(:votes, :playlist_id)
   end
 
   def self.down

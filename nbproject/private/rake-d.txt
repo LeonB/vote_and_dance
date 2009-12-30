@@ -1,3 +1,5 @@
+daemons\:start=(testing only) Starts the daemons in config/daemonz.yml
+daemons\:stop=(testing only) Stops the daemons in config/daemonz.yml
 db\:abort_if_pending_migrations=Raises an error if there are pending migrations
 db\:charset=Retrieves the charset for the current environment's database
 db\:collation=Retrieves the collation for the current environment's database
@@ -43,6 +45,7 @@ doc\:guides=Generate Rails guides
 doc\:plugins=Generate documentation for all installed plugins
 doc\:plugins\:authlogic=Generate documentation for the authlogic plugin
 doc\:plugins\:cells=Generate documentation for the cells plugin
+doc\:plugins\:daemonz=Generate documentation for the daemonz plugin
 doc\:plugins\:rails_xss=Generate documentation for the rails_xss plugin
 doc\:rails=Build the RDOC HTML Files
 doc\:reapp=Force a rebuild of the RDOC files
