@@ -1,15 +1,19 @@
 development: &defaults
-paths:
- - "~/Music"
- - "sftp://leon@basil.vanutsteen.nl/"
-exiftool: /usr/bin/exiftool
-accepted_extensions:
- - mp3
- - .ogg
- - .flac
- - .wma
- - ape
- - wav
+  paths:
+   - "~/Music"
+   - "sftp://leon@basil.vanutsteen.nl/"
+  exiftool: /usr/bin/exiftool
+  accepted_extensions:
+   - mp3
+   - .ogg
+   - .flac
+   - .wma
+   - ape
+   - wav
+   - mp4
+  artist_prefixes:
+    - the
+    - de
 
 test:
  <<: *defaults

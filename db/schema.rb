@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20091230225502) do
 
   create_table "artists", :force => true do |t|
     t.string   "name"
+    t.string   "name_without_prefix"
+    t.string   "prefix"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
