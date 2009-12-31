@@ -63,6 +63,16 @@ class Song < ActiveRecord::Base
     self.save
   end
 
+  def add_to_playlist(playlist = nil)
+    if not playlist
+      playlist = Playlist.default
+    end
+
+    pi = PlaylistItem.new
+    pi.song = self
+    playlist.playlist_items << pi
+  end
+
   def metadata?
     
   end
