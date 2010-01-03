@@ -1,0 +1,25 @@
+<div class="search">
+  <h1>Zoeken naar een artiest, album of nummer:</h1>
+  <%= render :partial => "form" %>
+</div>
+
+<h2>Zoekresultaten:</h2>
+<table width="100%">
+  <thead>
+  <th>Score</th>
+  <th>Resultaat</th>
+  <th>Acties</th>
+</thead>
+<tbody>
+  <%  @search_results.each do |result| %>
+  <tr class="<%=result.class.name.downcase()%>">
+      <td width="100"><%=(result.ferret_score*100).round()%>%</td>
+      <td><%= link_to(result.description, result) %></td>
+      <td width="100"><%= render(:partial => 'actions', :locals => { :result => result}) %></td>
+    </tr>
+
+    <%= render(:partial => 'songs', :locals => { :result => result}) %>
+
+  <% end %>
+</tbody>
+</table>

@@ -1,0 +1,13 @@
+<% if result.class == Song %>
+  <%= link_to_remote(image_tag('icons/play_licht.gif', :alt => 'play',
+      :mouseover => 'icons/play_donker.gif'), {
+    :url => {:controller => 'songs', :action => 'add_to_playlist', :id => result}},
+  {:class => 'action', :title => 'play'}) %>
+<% end %>
+
+<% if result.class == Artist || result.class == Album %>
+  <%= link_to_function(image_tag('icons/plus_licht.gif', :alt => 'play',
+      :mouseover => 'icons/plus_donker.gif'),
+    "$('#{result.class.name.downcase()}_#{result.id}').toggle()",
+  {:class => 'action', :title => 'openklappen'}) %>
+<% end %>

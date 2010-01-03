@@ -41,6 +41,8 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => "user_sessions", :action => "new"
 
   map.resources :songs
+  map.resources :albums
+  map.resources :artists
 
   # See how all your routes lay out with "rake routes"
 

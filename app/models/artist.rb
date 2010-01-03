@@ -1,13 +1,14 @@
 class Artist < ActiveRecord::Base
   has_many :albums
+  has_many :songs, :through => :albums
   before_save :save_prefix_in_seperate_field
 
   #Validations:
   validates_presence_of :name
 
   def self.initials()
-    Artist.find(:all, :select => 'DISTINCT SUBSTR( name_without_prefix, 1, 1) as initial',
-      :order => 'name_without_prefix').collect(&:initial).compact.map(&:downcase)
+    Artist.find(:all, :select => 'DISTINCT SUBSTR( LOWER(name_without_prefix), 1, 1) as initial',
+      :order => 'name_without_prefix').collect(&:initial)
   end
 
   def save_prefix_in_seperate_field
@@ -21,5 +22,9 @@ class Artist < ActiveRecord::Base
       end
       self.name_without_prefix = self.name
     end
+  end
+
+  def description
+    self.name
   end
 end

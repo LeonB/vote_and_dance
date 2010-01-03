@@ -8,7 +8,11 @@ class Album < ActiveRecord::Base
   validates_presence_of :title
 
   def self.initials()
-    Album.find(:all, :select => 'DISTINCT SUBSTR( title, 1, 1) as initial',
-      :order => 'title').collect(&:initial).compact.map(&:downcase)
+    Album.find(:all, :select => 'DISTINCT SUBSTR( LOWER(title), 1, 1) as initial',
+      :order => 'title').collect(&:initial).compact
+  end
+
+  def description
+    self.title
   end
 end

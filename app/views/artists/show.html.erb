@@ -1,0 +1,6 @@
+<img src="http://s3.amazonaws.com/songza.media.profile-img/_default/profile_48x48.jpg" />
+  <h1><%= @artist.name  %> </h1>
+
+<% content_for(:colright) do %>
+  <%=  render_cell(:artists, :albums) %>
+<% end %>

@@ -1,0 +1,20 @@
+<% if result.class == Artist || result.class == Album %>
+  <tr id="<%=result.class.name.downcase()%>_<%=result.id%>" class="songs" rel="hide-on-load">
+    <td>&nbsp;</td>
+    <td colspan="2">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <% result.songs.each do |song| %>
+          <tr>
+            <td>- <%= link_to(song.description, song) %></td>
+            <td width="100">
+              <%= link_to_remote(image_tag('icons/play_licht.gif', :alt => 'play',
+                  :mouseover => 'icons/play_donker.gif'), {
+                  :url => {:controller => 'songs', :action => 'add_to_playlist', :id => result}},
+                {:class => 'action', :title => 'play'}) %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </td>
+  </tr>
+<% end %>

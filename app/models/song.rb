@@ -89,6 +89,10 @@ class Song < ActiveRecord::Base
     end
   end
 
+  def description
+    self.title
+  end
+
 #  def album_with_smartness=(album_title)
 ##    album = Album.find_or_create_by_title_and_artist(album_title)
 #    album = Album.find_or_create_by_title(album_title)

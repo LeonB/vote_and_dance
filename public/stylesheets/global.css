@@ -1,0 +1,87 @@
+/* 
+    Document   : global
+    Created on : Jan 2, 2010, 10:09:38 AM
+    Author     : leon
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+html, body {
+    padding: 0px;
+    margin: 0px;
+    background-position: 0 0;
+    /*background-image: url(../images/page-wrap_bg.jpg);*/
+    background-repeat: repeat-x;
+    background-color: #CC3300;
+}
+
+.stripe_black {
+    position: absolute;
+    top: 0px;
+    background-color: black;
+    height: 30px;
+    width: 100%;
+    z-index: 0;
+}
+
+.stripe_white {
+    position: absolute;
+    top: 30px;
+    background-color: white;
+    height: 80px;
+    width: 100%;
+    z-index: 0;
+}
+
+#wrap {
+    padding: 0px;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+    position: relative;
+    z-index: 10;
+}
+
+#nav, #header, #main, #footer {
+    float: left;
+    width: 980px;
+}
+
+#nav {
+    height: 30px;
+    /*background-color: red;*/
+    text-align: right;
+}
+
+#header {
+    float: left;
+    height: 80px;
+}
+
+#header h1 {
+}
+
+#main {
+    display: table;
+}
+
+#colleft {
+    display: table-cell;
+    width: auto;
+}
+
+#colright {
+    display: table-cell;
+    width: 300px;
+    /*display: none;*/
+}
+
+#footer {
+    clear:both;
+}

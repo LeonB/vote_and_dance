@@ -42,5 +42,6 @@ Rails::Initializer.run do |config|
   ##CUSTOM##
   config.gem "simple-daemon"
   config.gem "rb-inotify"
+  config.gem "acts_as_ferret"
 #  require "inotify"
 end
