@@ -20,3 +20,8 @@ AppConfig.paths.each do |path|
 
   Indexer.new.walk(path)
 end
+
+User.create({:email => 'leon@tim-online.nl', :password => 'test',
+    :password_confirmation => 'test'})
+User.create({:email => 'test@tim-online.nl', :password => 'test',
+    :password_confirmation => 'test'})

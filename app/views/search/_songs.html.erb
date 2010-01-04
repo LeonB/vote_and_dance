@@ -6,10 +6,10 @@
         <% result.songs.each do |song| %>
           <tr>
             <td>- <%= link_to(song.description, song) %></td>
-            <td width="100">
+            <td width="50">
               <%= link_to_remote(image_tag('icons/play_licht.gif', :alt => 'play',
                   :mouseover => 'icons/play_donker.gif'), {
-                  :url => {:controller => 'songs', :action => 'add_my_vote', :id => result}},
+                  :url => {:controller => 'songs', :action => 'add_my_vote', :id => song}},
                 {:class => 'action', :title => 'play'}) %>
             </td>
           </tr>

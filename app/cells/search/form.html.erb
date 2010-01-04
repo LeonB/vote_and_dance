@@ -1,0 +1,10 @@
+<div class="search">
+  <h1>Zoeken naar een artiest, album of nummer:</h1>
+
+  <% form_for :search, :url => { :action => "index" } do |f| %>
+  <%#= text_field_with_auto_complete :search, :all, :value => params[:search][:all] %>
+    <%= text_field :search, :all, :value => params[:search][:all] %>
+    <%= submit_tag "Zoeken" %>
+  <% end %>
+  
+</div>

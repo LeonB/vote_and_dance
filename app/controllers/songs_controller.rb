@@ -6,8 +6,12 @@ class SongsController < ApplicationController
   end
 
   def add_my_vote
-    @songs = Song.find(params[:id])
-    #if not in playlist add, it
-    #then: playlist_item.add_vote(my.id)
+    @song = Song.find(params[:id])
+    @vote = @song.add_vote(current_user)
+
+      respond_to do |format|
+        format.html { redirect_to(:back)}
+        format.js
+      end
   end
 end

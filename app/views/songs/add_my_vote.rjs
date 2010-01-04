@@ -1,2 +1,7 @@
 # TODO Operate on the page object
-page.alert("#{@songs.description} vote toegevoegd");
+if @vote.errors.length > 0
+  page.alert("De volgende foutmeldingen zijn opgetreden:
+#{@vote.errors.full_messages.collect do |error| "  - #{error}" end.join("\n")}")
+else
+  page.alert("Je stem is aan \"#{@song.description}\" toegevoegd");
+end

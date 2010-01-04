@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20091230225502) do
     t.integer  "position"
     t.boolean  "playing",     :default => false
     t.datetime "played_at"
+    t.boolean  "played",      :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -89,15 +90,14 @@ ActiveRecord::Schema.define(:version => 20091230225502) do
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
 
   create_table "votes", :force => true do |t|
-    t.integer  "song_id"
-    t.integer  "playlist_id"
+    t.integer  "playlist_item_id"
     t.integer  "created_by"
     t.integer  "updated_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["playlist_id"], :name => "index_votes_on_playlist_id"
-  add_index "votes", ["song_id"], :name => "index_votes_on_song_id"
+  add_index "votes", ["playlist_item_id", "created_by"], :name => "index_votes_on_playlist_item_id_and_created_by", :unique => true
+  add_index "votes", ["playlist_item_id"], :name => "index_votes_on_playlist_item_id"
 
 end

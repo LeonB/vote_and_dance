@@ -1,5 +1,4 @@
 class Song < ActiveRecord::Base
-  has_many :votes
   belongs_to :album
   belongs_to :artist
 
@@ -71,6 +70,18 @@ class Song < ActiveRecord::Base
     pi = PlaylistItem.new
     pi.song = self
     playlist.items << pi
+  end
+
+  def add_vote(user)
+    if Playlist.default.songs.include?(self)
+      @playlist_item = Playlist.default.items.find_by_song_id(self.id)
+    else
+      @playlist_item = PlaylistItem.create({:song_id => self.id,
+          :playlist_id => Playlist.default.id})
+    end
+
+    vote = @playlist_item.add_vote(user)
+    return vote
   end
 
   def metadata?

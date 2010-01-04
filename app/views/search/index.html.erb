@@ -1,34 +1,33 @@
-<div class="search">
-  <h1>Zoeken naar een artiest, album of nummer:</h1>
-  <%= render :partial => "form" %>
-</div>
+<%= render_cell(:search, :form) %>
 
-<h2>Zoekresultaten:</h2>
-<table width="100%">
-  <% if @search_results.length < 1 %>
-    <tr>
-      <td>Helaas, niks gevonden</td>
-    </tr>
-  <% else %>
-    <thead>
-    <th>Score</th>
-    <th>Resultaat</th>
-    <th>Acties</th>
-  </thead>
-  <tbody>
-    <%  @search_results.each do |result| %>
-      <tr class="<%=result.class.name.downcase()%>">
-        <td width="100"><%=(result.ferret_score*100).round()%>%</td>
-        <td><%= link_to(result.description, result) %></td>
-        <td width="100"><%= render(:partial => 'actions', :locals => { :result => result}) %></td>
+<% if not params[:search][:all].nil? %>
+  <h2>Zoekresultaten:</h2>
+  <table width="100%">
+    <% if @search_results.length < 1 %>
+      <tr>
+        <td>Helaas, niks gevonden</td>
       </tr>
+    <% else %>
+      <thead>
+      <th>Score</th>
+      <th>Resultaat</th>
+      <th>Acties</th>
+    </thead>
+    <tbody>
+      <%  @search_results.each do |result| %>
+        <tr class="<%=result.class.name.downcase()%>">
+          <td width="80"><%=(result.ferret_score*100).round()%>%</td>
+          <td><%= link_to(result.description, result) %></td>
+          <td width="50"><%= render(:partial => 'actions', :locals => { :result => result}) %></td>
+        </tr>
 
-      <%= render(:partial => 'songs', :locals => { :result => result}) %>
+        <%= render(:partial => 'songs', :locals => { :result => result}) %>
 
-    <% end %>
-  </tbody>
+      <% end %>
+    </tbody>
+  <% end %>
+  </table>
 <% end %>
-</table>
 
 <% content_for(:colright) do %>
   <%=  render_cell(:playlist, :currently_playing) %>

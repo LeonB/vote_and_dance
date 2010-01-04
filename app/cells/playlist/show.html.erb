@@ -6,7 +6,13 @@
       <% if playlist_item.playing? %>
         <li><strong><%= playlist_item.song.description %></strong></li>
       <% else %>
-        <li><%= playlist_item.song.description %> </li>
+        <li><%= link_to(playlist_item.song.description, playlist_item.song) %>
+          <% if playlist_item.votes.length > 1 %>
+            (<%=playlist_item.votes.length%> stemmen)
+          <% else %>
+            (1 stem)
+          <% end %>
+        </li>
       <% end %>
     <% end %>
   </ol>

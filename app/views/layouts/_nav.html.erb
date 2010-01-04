@@ -1,5 +1,10 @@
 <a href="/">Home</a>
 |
-<a href="">Zoeken</a>
+<a href="/search">Zoeken</a>
 |
-<a href="">Inloggen</a>
+<% if current_user %>
+  <%#*<a href="/user_sessions/new">Mijn account</a>%>
+  <a href="/user_sessions/destroy">Uitloggen</a>
+<% else %>
+  <a href="/user_sessions/new">Inloggen</a>
+<% end %>
