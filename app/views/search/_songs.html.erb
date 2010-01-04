@@ -9,7 +9,7 @@
             <td width="100">
               <%= link_to_remote(image_tag('icons/play_licht.gif', :alt => 'play',
                   :mouseover => 'icons/play_donker.gif'), {
-                  :url => {:controller => 'songs', :action => 'add_to_playlist', :id => result}},
+                  :url => {:controller => 'songs', :action => 'add_my_vote', :id => result}},
                 {:class => 'action', :title => 'play'}) %>
             </td>
           </tr>

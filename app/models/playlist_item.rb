@@ -5,4 +5,8 @@ class PlaylistItem < ActiveRecord::Base
 
   #Plugins:
   acts_as_list :scope => :playlist
+
+  def playing?
+    (self.playing)
+  end
 end

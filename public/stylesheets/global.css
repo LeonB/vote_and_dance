@@ -80,6 +80,7 @@ html, body {
     display: table-cell;
     width: 300px;
     /*display: none;*/
+    padding-left: 50px;
 }
 
 #footer {

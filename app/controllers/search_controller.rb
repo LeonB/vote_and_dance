@@ -1,7 +1,11 @@
 class SearchController < ApplicationController
   def index
-    params[:search] = {} if not params[:search]
-    @search_results = ActsAsFerret.find("*#{params[:search][:all]}*", 'shared')
+    if params[:search] && params[:search][:all]
+      @search_results = ActsAsFerret.find("*#{params[:search][:all]}*", 'shared')
+    else
+      params[:search] = {}
+      @search_results = []
+    end
   end
 
   def auto_complete_for_search_all

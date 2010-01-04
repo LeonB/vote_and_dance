@@ -70,7 +70,7 @@ class Song < ActiveRecord::Base
 
     pi = PlaylistItem.new
     pi.song = self
-    playlist.playlist_items << pi
+    playlist.items << pi
   end
 
   def metadata?

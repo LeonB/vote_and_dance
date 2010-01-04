@@ -1,6 +1,7 @@
-<%#
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-%>
+<p>Ik denk dat hier een korte uitleg moet komen hoe alles werkt. Niks
+moelijks. Gewoon: inloggen, zoeken en dansen :p</p>
 
-<%= "index" %>
+<% content_for(:colright) do %>
+  <%=  render_cell(:playlist, :currently_playing) %>
+  <%=  render_cell(:playlist, :show) %>
+<% end %>

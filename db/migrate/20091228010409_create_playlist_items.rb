@@ -2,8 +2,9 @@ class CreatePlaylistItems < ActiveRecord::Migration
   def self.up
     create_table :playlist_items do |t|
       t.integer :song_id, :playlist_id, :position
-      t.boolean :playing, :default => false
+      t.boolean :playing, :default => false      
       t.datetime :played_at
+      t.boolean :played, :default => false
       t.timestamps
     end
 

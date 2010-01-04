@@ -1,0 +1,15 @@
+<h2>Playlist</h2>
+
+<% if @playlist.items.length > 0 %>
+  <ol>
+    <% @playlist.items.each do |playlist_item| %>
+      <% if playlist_item.playing? %>
+        <li><strong><%= playlist_item.song.description %></strong></li>
+      <% else %>
+        <li><%= playlist_item.song.description %> </li>
+      <% end %>
+    <% end %>
+  </ol>
+<% else %>
+  <p>Nothing in the playlist</p>
+<% end %>
