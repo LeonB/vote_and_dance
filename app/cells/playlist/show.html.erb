@@ -1,21 +1,32 @@
 <h2>Playlist</h2>
 
 <% if @playlist.items.length > 0 %>
-  <ol>
+<table width="100%">
     <% @playlist.items.each do |playlist_item| %>
-      <% if playlist_item.playing? %>
-        <li><strong><%= playlist_item.song.description %></strong></li>
-      <% else %>
-        <li><%= link_to(playlist_item.song.description, playlist_item.song) %>
+      <tr>
+        <td>
+          <% if playlist_item.playing? %>
+            <strong><%= link_to(playlist_item.song.description, playlist_item.song) %></strong>
+          <% else %>
+            <%= link_to(playlist_item.song.description, playlist_item.song) %>
+          <% end %>
+        </td>
+        <td>
           <% if playlist_item.votes.length > 1 %>
             (<%=playlist_item.votes.length%> stemmen)
           <% else %>
             (1 stem)
           <% end %>
-        </li>
-      <% end %>
+        </td>
+        <td>
+          <%= link_to_remote(image_tag('icons/thumb_up_licht.gif', :alt => 'play',
+              :mouseover => 'icons/thumb_up_donker.gif'), {
+              :url => {:controller => 'songs', :action => 'add_my_vote', :id => playlist_item.song}},
+            {:class => 'action', :title => 'play'}) %>
+        </td>
+      </tr>
     <% end %>
-  </ol>
+  </table>
 <% else %>
   <p>Nothing in the playlist</p>
 <% end %>

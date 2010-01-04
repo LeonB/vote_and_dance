@@ -1,0 +1,8 @@
+icecream checkt om de 5 seconden /playlists/default/items.xml (named scope????)
+ah, iets gevonden!
+pak de bovenste
+zend signaal terug (hook) => begonnen met spelen van #{path}
+wachten tot 3 seconden voor het einde (zoiets)
+is er iets? 
+Ja: pak daar de eerste van
+liedje afgelopen: zend signaal (hook) => liedje afgelopen

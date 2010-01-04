@@ -4,3 +4,6 @@ http://github.com/costan/daemonz/
 http://blog.costan.us/2008/11/black-art-of-background-processing-in.html
 
 rake db:drop && rake db:migrate && rake db:seed
+
+licht: fe9800
+donker: dd4411
